@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación de Pago</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro completo */
+            color: white; /* Color del texto */
+            height: 100vh; /* Altura completa de la vista */
+            display: flex; /* Usar flexbox para centrar el contenido */
+            flex-direction: column; /* Direccionar en columna */
+            align-items: center; /* Centrar horizontalmente */
+            justify-content: center; /* Centrar verticalmente */
+        }
+
+        /* Estilo del contenedor principal */
+        .content {
+            text-align: center; /* Centrar el texto */
+            padding: 20px; /* Espaciado interno */
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente para el contenido */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Sombra del cuadro */
+        }
+
+        /* Estilo del botón */
+        .action-button {
+            background-color: rgba(0, 0, 255, 0.8); /* Color azul semitransparente */
+            border: none;
+            color: white;
+            padding: 10px 20px; /* Tamaño del botón */
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Margen encima del botón */
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+            text-decoration: none; /* Sin subrayado */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .action-button:hover {
+            background-color: rgba(0, 0, 255, 1); /* Color azul más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Facturación de Pago</h1>
+        <p>Realiza tu pago de manera segura y eficiente.</p>
+        <a class="action-button" href="pagar.html">Pagar</a>
+    </div>
+
+</body>
+</html>

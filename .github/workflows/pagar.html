@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagar</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro completo */
+            color: white; /* Color del texto */
+            height: 100vh; /* Altura completa de la vista */
+            display: flex; /* Usar flexbox para centrar el contenido */
+            flex-direction: column; /* Direccionar en columna */
+            align-items: center; /* Centrar horizontalmente */
+            justify-content: center; /* Centrar verticalmente */
+            position: relative; /* Posicionamiento relativo para los círculos */
+        }
+
+        /* Estilo del contenedor principal */
+        .content {
+            text-align: center; /* Centrar el texto */
+            padding: 20px; /* Espaciado interno */
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente para el contenido */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Sombra del cuadro */
+            width: 300px; /* Ancho del contenedor */
+        }
+
+        /* Estilo del formulario */
+        form {
+            display: flex;
+            flex-direction: column; /* Dirección en columna */
+            margin-top: 20px; /* Espaciado superior */
+        }
+
+        /* Estilo de los campos del formulario */
+        input {
+            padding: 10px;
+            margin: 10px 0; /* Margen arriba y abajo */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 16px; /* Tamaño de la fuente */
+        }
+
+        /* Estilo del botón de enviar */
+        .submit-button {
+            background-color: rgba(0, 0, 255, 0.8); /* Color azul semitransparente */
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .submit-button:hover {
+            background-color: rgba(0, 0, 255, 1); /* Color azul más oscuro al pasar el mouse */
+        }
+
+        /* Estilos para los círculos */
+        .circle-container {
+            position: absolute; /* Posicionamiento absoluto para la parte inferior */
+            bottom: 20px; /* Separar del fondo */
+            display: flex; /* Usar flexbox para los círculos */
+            justify-content: space-around; /* Espaciado entre círculos */
+            width: 80%; /* Ancho del contenedor de círculos */
+        }
+
+        .circle {
+            width: 60px; /* Ancho del círculo (más grande) */
+            height: 60px; /* Alto del círculo (más grande) */
+            border-radius: 50%; /* Bordes redondeados para formar un círculo */
+            overflow: hidden; /* Esconder el desbordamiento */
+            border: 2px solid white; /* Borde blanco */
+            display: flex; /* Usar flexbox para centrar la imagen */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            transition: transform 0.3s; /* Transición suave para el efecto de escala */
+        }
+
+        .circle:hover {
+            transform: scale(1.2); /* Agrandar en 3D al pasar el mouse */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Sombra adicional al agrandarse */
+        }
+
+        .circle img {
+            width: 100%; /* Ajustar la imagen al ancho del círculo */
+            height: auto; /* Mantener la relación de aspecto */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Pagar</h1>
+        <p>Ingresa tus detalles de pago a continuación:</p>
+        <form id="payment-form">
+            <input type="text" placeholder="Número de referencia" required>
+            <input type="text" placeholder="Código de seguridad" required>
+            <button type="submit" class="submit-button">Realizar Pago</button>
+        </form>
+    </div>
+
+    <div class="circle-container">
+        <a href="https://www.visa.com.co/" class="circle">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR03J-2Z2fy1C7oO0bpTJXkorFqz7aa6dNOov9KVS6OvYtRKOfIUICxW3fV04YRzsw-s-8&usqp=CAU" alt="Icono 1">
+        </a>
+        <a href="https://www.mastercard.com.co/es-co.html" class="circle">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbXmcPN_DP6_dHQePARMX9IH6ypMdmihinA&s" alt="Icono 2">
+        </a>
+        <a href="https://www.westernunion.com/co/es/home.html" class="circle">
+            <img src="https://play-lh.googleusercontent.com/sVsXzyV5YHjHjRmFNuJdjGlirCVGgdzGg0zbPncfKAuRcWcByUUDOVySF--dEPZGyQrV" alt="Icono 3">
+        </a>
+        <a href="https://www.bancolombia.com/personas" class="circle">
+            <img src="https://play-lh.googleusercontent.com/s3bzienEV2fn3UJVlrTkKwJyMP19f-MmozwaXboNEDBExD8zGFpAHTbXf4W2LlwAZCg=w240-h480-rw" alt="Icono 4">
+        </a>
+        <a href="https://www.daviplata.com/wps/portal/daviplata/Home/QueEsDaviPlata/!ut/p/z1/hY7BDoIwEES_hQNXdgUU462gQY3R4EGhFwOmFkyhpFT4fWs8kWCc2-68mQxQSIE2eV_xXFeyyYW5M7q4BYmP28ifHWMSbTBBN9itLx5i7MP1H0CNjT9E0OTpBEIwPLvhp-DkTgKjjj1QLmTxnUuawltyoIo9mGLKeSnzLrVuu5WNNg7D4HApuWDOXdY2TkVK2WlIxyS0dYrPuegPxLLeIhg6wg!!/dz/d5/L2dBISEvZ0FBIS9nQSEh/" class="circle">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNiaqSUUikL2CdwWL_GtLdNIenoNM0uyurtw&s" alt="Icono 5">
+        </a>
+    </div>
+
+    <script>
+        // Simulación del proceso de pago
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+            alert('Pago realizado con éxito'); // Mensaje de confirmación
+        });
+    </script>
+
+</body>
+</html>

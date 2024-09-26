@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Almacenes</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Evitar scroll */
+        }
+
+        /* Estilo del contenedor principal */
+        .parallax {
+            /* Imagen de fondo del almacén */
+            background-image: url('https://www.scmlogistica.es/wp-content/uploads/Automatizar-un-almace%CC%81n.jpg'); /* Cambia esta URL por tu imagen de fondo */
+            height: 100vh; /* Altura completa de la vista */
+            background-attachment: fixed; /* Fijar la imagen de fondo para el efecto parallax */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* No repetir la imagen */
+            background-size: contain; /* Ajustar la imagen para que se vea completa */
+        }
+
+        /* Estilos para el contenido */
+        .content {
+            position: absolute; /* Para posicionar el contenido sobre el fondo */
+            top: 50%; /* Centrar verticalmente */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translate(-50%, -50%); /* Ajustar el centro */
+            z-index: 1; /* Asegurar que el contenido esté por encima del fondo */
+            color: black; /* Color del texto */
+            text-align: center; /* Centrar el texto */
+            padding: 20px; /* Espaciado interno */
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente blanco */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra del cuadro */
+        }
+
+        /* Estilo del botón */
+        .action-button {
+            background-color: rgba(0, 0, 255, 0.8); /* Color azul semitransparente */
+            border: none;
+            color: white;
+            padding: 10px 20px; /* Tamaño del botón */
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Margen encima del botón */
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+            text-decoration: none; /* Sin subrayado */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .action-button:hover {
+            background-color: rgba(0, 0, 255, 1); /* Color azul más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="parallax">
+        <div class="content">
+            <h1>GESTIÓN DE ALMACENES</h1>
+            <p>Administra tus almacenes de forma eficiente.</p>
+            <a class="action-button" href="almacenes.html">Gestionar Almacenes</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://economipedia.com/wp-content/uploads/Cadena-de-Suministro.jpg'); /* Cambia esta URL por tu imagen de fondo */
+            background-size: contain; /* Ajustar la imagen para que se vea completa */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* No repetir la imagen */
+            height: 100vh; /* Altura de la vista completa */
+            display: flex;
+            justify-content: flex-end; /* Alinear el contenido a la derecha */
+            align-items: flex-end; /* Alinear el contenido a la parte inferior */
+            position: relative; /* Para posicionar el botón */
+            color: white; /* Color del texto (si es necesario) */
+        }
+
+        /* Estilo del botón */
+        .location-button {
+            background-color: rgba(0, 0, 255, 0.8); /* Color azul semitransparente */
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px; /* Margen alrededor del botón */
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .location-button:hover {
+            background-color: rgba(0, 0, 255, 1); /* Color azul más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <button class="location-button" onclick="getLocation()">Ubicación</button>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("La geolocalización no es soportada por este navegador.");
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const mapUrl = `https://www.google.com/maps/@${latitude},${longitude},15z`; // URL de Google Maps
+            window.open(mapUrl, '_blank'); // Abrir la ubicación en una nueva pestaña
+        }
+    </script>
+
+</body>
+</html>
