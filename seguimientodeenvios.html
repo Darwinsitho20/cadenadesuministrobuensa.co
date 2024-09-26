@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de Envíos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro */
+            color: white; /* Texto blanco */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 300px; /* Ancho del formulario */
+            text-align: center; /* Centrar texto */
+        }
+
+        /* Estilos de los campos del formulario */
+        input {
+            width: 100%; /* Ancho completo */
+            padding: 10px;
+            margin: 10px 0; /* Espaciado vertical */
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            text-align: center; /* Centrar el texto dentro de los inputs */
+            box-sizing: border-box; /* Incluir el padding en el ancho */
+        }
+
+        button {
+            background-color: #007BFF; /* Color del botón */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Ancho completo */
+            margin-top: 10px; /* Espacio entre botones */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+
+        /* Estilo para el área de resultados */
+        .result-container {
+            margin-top: 20px; /* Espacio superior */
+            text-align: left; /* Alinear texto a la izquierda */
+            display: none; /* Ocultar inicialmente */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Seguimiento de Envíos</h2>
+        <form id="trackingForm">
+            <label for="tracking-number">Número de Seguimiento</label>
+            <input type="text" id="tracking-number" placeholder="Ingresa el número de seguimiento" required>
+
+            <button type="submit">Buscar</button>
+            <button type="button" id="trackButton">Rastrear</button>
+        </form>
+
+        <div class="result-container" id="resultContainer">
+            <h3>Estado del Envío</h3>
+            <p id="trackingResult"></p>
+        </div>
+    </div>
+
+    <script>
+        // Simulación de datos de seguimiento de envío
+        const mockTrackingData = {
+            '12345': 'En camino',
+            '67890': 'Entregado',
+            '54321': 'En espera',
+            '98765': 'No encontrado'
+        };
+
+        // Función para manejar la presentación del formulario
+        document.getElementById('trackingForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            
+            const trackingNumber = document.getElementById('tracking-number').value;
+            const resultContainer = document.getElementById('resultContainer');
+            const trackingResult = document.getElementById('trackingResult');
+
+            // Buscar el estado del envío
+            if (mockTrackingData[trackingNumber]) {
+                trackingResult.textContent = `El estado de tu envío es: ${mockTrackingData[trackingNumber]}`;
+            } else {
+                trackingResult.textContent = 'Número de seguimiento no encontrado.';
+            }
+
+            resultContainer.style.display = 'block'; // Mostrar el contenedor de resultados
+        });
+
+        // Función para rastrear la ubicación GPS
+        document.getElementById('trackButton').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    // Simular un enlace a Google Maps con la ubicación
+                    const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                    window.open(url, '_blank'); // Abrir en una nueva pestaña
+                }, function() {
+                    alert('No se pudo obtener la ubicación. Asegúrate de permitir el acceso a la ubicación.');
+                });
+            } else {
+                alert('La geolocalización no es compatible con este navegador.');
+            }
+        });
+    </script>
+
+</body>
+</html>

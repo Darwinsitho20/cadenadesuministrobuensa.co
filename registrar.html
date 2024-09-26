@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Almacén</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://media.istockphoto.com/id/1414136080/es/v%C3%ADdeo/ingeniero-t%C3%A9cnico-que-trabaja-en-ropa-de-trabajo-de-protecci%C3%B3n-controlando-y-dirigiendo-el.jpg?s=640x640&k=20&c=eGA5_UeVTfr_PyN41zUFrpTuabZMYBJBILhv8LVfPJk=') no-repeat center center fixed; /* Imagen de fondo */
+            background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+            display: flex; /* Usar flexbox para centrar el contenido */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            height: 100vh; /* Altura completa de la vista */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilo del contenedor principal */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra del cuadro */
+            padding: 20px; /* Espaciado interno */
+            width: 80%; /* Ancho del contenedor */
+            max-width: 600px; /* Ancho máximo del contenedor */
+            text-align: center; /* Alinear texto al centro */
+        }
+
+        /* Estilo de los campos del formulario */
+        input, select {
+            padding: 10px; /* Espaciado interno */
+            margin: 10px 0; /* Margen arriba y abajo */
+            border: 1px solid #ccc; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 16px; /* Tamaño de la fuente */
+            width: calc(100% - 22px); /* Ajustar ancho para el borde */
+        }
+
+        /* Estilo del botón */
+        .register-button {
+            padding: 10px; /* Espaciado interno */
+            background-color: rgba(0, 128, 0, 0.8); /* Color verde semitransparente */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+            font-size: 16px; /* Tamaño de la fuente */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .register-button:hover {
+            background-color: rgba(0, 128, 0, 1); /* Color verde más oscuro al pasar el mouse */
+        }
+
+        /* Estilo de la lista de almacenes */
+        .warehouse-list {
+            margin-top: 20px; /* Espaciado superior */
+            list-style-type: none; /* Sin viñetas */
+            padding: 0; /* Sin espaciado interno */
+        }
+
+        /* Estilo de cada elemento de la lista */
+        .warehouse-list li {
+            padding: 10px; /* Espaciado interno */
+            border: 1px solid #ccc; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            margin-bottom: 10px; /* Espaciado inferior */
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+            display: flex; /* Usar flexbox para contenido */
+            justify-content: space-between; /* Espacio entre elementos */
+            align-items: center; /* Alinear verticalmente */
+        }
+
+        /* Estilo del botón de eliminar */
+        .delete-button {
+            padding: 5px 10px; /* Espaciado interno */
+            background-color: rgba(255, 0, 0, 0.8); /* Color rojo semitransparente */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón de eliminar */
+        .delete-button:hover {
+            background-color: rgba(255, 0, 0, 1); /* Color rojo más oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Registrar Almacén</h1>
+        <form id="warehouse-form">
+            <input type="text" id="warehouse-name" placeholder="Nombre del Almacén" required>
+            <input type="text" id="warehouse-location" placeholder="Ubicación" required>
+            <input type="text" id="warehouse-contact" placeholder="Contacto" required>
+            <input type="text" id="warehouse-size" placeholder="Tamaño (m²)" required>
+            <select id="warehouse-type" required>
+                <option value="" disabled selected>Tipo de Almacén</option>
+                <option value="frío">Frío</option>
+                <option value="seco">Seco</option>
+                <option value="húmedo">Húmedo</option>
+                <option value="logístico">Logístico</option>
+                <option value="industrial">Industrial</option>
+                <option value="tecnológico">Tecnológico</option>
+                <option value="portuario">Portuario</option>
+            </select>
+            <button type="submit" class="register-button">Registrar Almacén</button>
+        </form>
+
+        <ul class="warehouse-list" id="warehouse-list">
+            <!-- La lista de almacenes se añadirá aquí -->
+        </ul>
+    </div>
+
+    <script>
+        // Función para añadir almacenes a la lista
+        document.getElementById('warehouse-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            const name = document.getElementById('warehouse-name').value; // Obtener el nombre del almacén
+            const location = document.getElementById('warehouse-location').value; // Obtener la ubicación
+            const contact = document.getElementById('warehouse-contact').value; // Obtener contacto
+            const size = document.getElementById('warehouse-size').value; // Obtener tamaño
+            const type = document.getElementById('warehouse-type').value; // Obtener tipo
+
+            // Crear un nuevo elemento de lista
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}" target="_blank" style="flex-grow: 1; text-decoration: none; color: inherit;">
+                    ${name} - ${location} - ${contact} - ${size} m² - ${type}
+                </a>
+                <button class="delete-button">Eliminar</button>
+            `;
+
+            // Añadir el nuevo elemento a la lista
+            document.getElementById('warehouse-list').appendChild(listItem);
+
+            // Limpiar los campos del formulario
+            document.getElementById('warehouse-form').reset();
+
+            // Añadir funcionalidad de eliminación
+            listItem.querySelector('.delete-button').addEventListener('click', function() {
+                listItem.remove(); // Eliminar el almacén de la lista al hacer clic en eliminar
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Proyecto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white; /* Texto en blanco */
+        }
+
+        .form-container {
+            background-color: #333; /* Color de fondo oscuro */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            width: 400px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: white; /* Título en blanco */
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: white; /* Texto de los labels en blanco */
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box; /* Evitar que el contenido sobresalga */
+        }
+
+        .form-container input[type="text"] {
+            text-align: center; /* Centrar el texto del campo de entrada */
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Agregar Nuevo Proyecto</h2>
+        <form id="project-form">
+            <label for="project-name">Nombre del Proyecto</label>
+            <input type="text" id="project-name" placeholder="Ingresa el nombre del proyecto" required>
+
+            <label for="project-url">URL del Proyecto</label>
+            <input type="text" id="project-url" placeholder="Ingresa el link de la página" required>
+
+            <label for="status">Estado</label>
+            <select id="status">
+                <option value="En Proceso">En Proceso</option>
+                <option value="Completado">Completado</option>
+                <option value="Pendiente">Pendiente</option>
+            </select>
+
+            <label for="start-date">Fecha de Inicio</label>
+            <input type="date" id="start-date" required>
+
+            <label for="end-date">Fecha de Finalización</label>
+            <input type="date" id="end-date">
+
+            <button type="submit">Guardar Proyecto</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('project-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+            // Obtener los valores de los campos de entrada
+            const projectName = document.getElementById('project-name').value;
+            const projectUrl = document.getElementById('project-url').value;
+            const status = document.getElementById('status').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            // Crear el contenido del archivo HTML que se va a descargar
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html lang="es">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${projectName}</title>
+                </head>
+                <body>
+                    <h1>Proyecto: ${projectName}</h1>
+                    <p>URL del Proyecto: <a href="${projectUrl}" target="_blank">${projectUrl}</a></p>
+                    <p>Estado: ${status}</p>
+                    <p>Fecha de Inicio: ${startDate}</p>
+                    <p>Fecha de Finalización: ${endDate || 'No especificada'}</p>
+                </body>
+                </html>
+            `;
+
+            // Crear un blob con el contenido HTML
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+
+            // Crear un enlace de descarga
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${projectName}.html`; // Nombre del archivo de descarga
+            link.click(); // Simular un clic en el enlace para iniciar la descarga
+        });
+    </script>
+
+</body>
+</html>

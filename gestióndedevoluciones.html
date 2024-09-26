@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Devoluciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro */
+            color: white; /* Texto blanco */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 400px; /* Ancho del formulario */
+            text-align: center; /* Centrar texto */
+        }
+
+        /* Estilos de los campos del formulario */
+        input, select {
+            width: 100%; /* Ancho completo */
+            padding: 10px;
+            margin: 10px 0; /* Espaciado vertical */
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            text-align: center; /* Centrar el texto dentro de los inputs */
+            box-sizing: border-box; /* Incluir el padding en el ancho */
+        }
+
+        button {
+            background-color: #007BFF; /* Color del botón */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Ancho completo */
+            margin-top: 10px; /* Espacio entre botones */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Gestión de Devoluciones</h2>
+        <form id="returnForm">
+            <label for="product-name">Nombre del Producto</label>
+            <input type="text" id="product-name" placeholder="Ingresa el nombre del producto" required>
+
+            <label for="return-reason">Razón de la Devolución</label>
+            <input type="text" id="return-reason" placeholder="Ingresa la razón de la devolución" required>
+
+            <label for="return-quantity">Cantidad</label>
+            <input type="number" id="return-quantity" placeholder="Ingresa la cantidad" required>
+
+            <button type="submit">Guardar Devolución</button>
+        </form>
+    </div>
+
+    <script>
+        // Función para manejar la presentación del formulario
+        document.getElementById('returnForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            
+            const productName = document.getElementById('product-name').value;
+            const returnReason = document.getElementById('return-reason').value;
+            const returnQuantity = document.getElementById('return-quantity').value;
+
+            // Crear un PDF con los detalles de la devolución
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(12);
+            doc.text("Detalles de la Devolución", 20, 20);
+            doc.text(`Nombre del Producto: ${productName}`, 20, 30);
+            doc.text(`Razón de la Devolución: ${returnReason}`, 20, 40);
+            doc.text(`Cantidad: ${returnQuantity}`, 20, 50);
+
+            // Generar el archivo PDF y forzar la descarga
+            doc.save("devolucion.pdf");
+
+            // Limpiar el formulario
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Productos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fondo negro */
+            color: white; /* Texto blanco */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 300px; /* Ancho del formulario */
+            text-align: center; /* Centrar texto */
+        }
+
+        /* Estilos de los campos del formulario */
+        input, select {
+            width: 100%; /* Ancho completo */
+            padding: 10px;
+            margin: 10px 0; /* Espaciado vertical */
+            border: none;
+            border-radius: 5px; /* Bordes redondeados */
+            text-align: center; /* Centrar el texto dentro de los inputs */
+            box-sizing: border-box; /* Incluir el padding en el ancho */
+        }
+
+        button {
+            background-color: #007BFF; /* Color del botón */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Ancho completo */
+            margin-top: 10px; /* Espacio entre botones */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+
+        /* Estilo para el área de resultados */
+        .result-container {
+            margin-top: 20px; /* Espacio superior */
+            text-align: left; /* Alinear texto a la izquierda */
+            display: none; /* Ocultar inicialmente */
+        }
+    </style>
+    <!-- Carga de la biblioteca jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Control de Productos</h2>
+        <form id="productForm">
+            <label for="product-name">Nombre del Producto</label>
+            <input type="text" id="product-name" placeholder="Ingresa el nombre del producto" required>
+
+            <label for="product-price">Precio</label>
+            <input type="number" id="product-price" placeholder="Ingresa el precio" required>
+
+            <label for="product-quantity">Cantidad</label>
+            <input type="number" id="product-quantity" placeholder="Ingresa la cantidad" required>
+
+            <label for="product-category">Categoría</label>
+            <select id="product-category" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="Electrónica">Electrónica</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Alimentos">Alimentos</option>
+                <option value="Hogar">Hogar</option>
+                <option value="Salud">Salud</option>
+            </select>
+
+            <button type="submit">Guardar Producto</button>
+        </form>
+
+        <div class="result-container" id="resultContainer">
+            <h3>Producto Guardado</h3>
+            <p id="productResult"></p>
+        </div>
+    </div>
+
+    <script>
+        // Función para manejar la presentación del formulario
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            
+            const productName = document.getElementById('product-name').value;
+            const productPrice = document.getElementById('product-price').value;
+            const productQuantity = document.getElementById('product-quantity').value;
+            const productCategory = document.getElementById('product-category').value;
+
+            // Mostrar resultado
+            const resultContainer = document.getElementById('resultContainer');
+            const productResult = document.getElementById('productResult');
+            productResult.textContent = `Producto: ${productName}, Precio: $${productPrice}, Cantidad: ${productQuantity}, Categoría: ${productCategory}`;
+            resultContainer.style.display = 'block'; // Mostrar el contenedor de resultados
+            
+            // Generar PDF con los detalles del producto
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text(`Nombre del Producto: ${productName}`, 10, 10);
+            doc.text(`Cantidad: ${productPrice}`, 10, 20);
+            doc.text(`Precio: $${productQuantity}`, 10, 30);
+            doc.text(`Categoría: ${productCategory}`, 10, 40);
+            doc.save(`${productName}.pdf`); // Descargar el PDF con el nombre del producto
+            
+            // Limpiar el formulario
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Almacenes</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/fotos-premium/gestion-inventario-almacen-fabrica-metalurgia-ingeniero-o-inspector-conduccion-almacenamiento_114016-8854.jpg'); /* Añadir imagen de fondo */
+            background-size: contain; /* Ajustar la imagen a la pantalla */
+            background-position: center; /* Centrar la imagen */
+            background-repeat: no-repeat; /* No repetir la imagen */
+            height: 100vh; /* Altura completa de la vista */
+            display: flex; /* Usar flexbox para centrar el contenido */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilo del contenedor principal */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra del cuadro */
+            padding: 20px; /* Espaciado interno */
+            width: 80%; /* Ancho del contenedor */
+            max-width: 600px; /* Ancho máximo del contenedor */
+        }
+
+        /* Estilo de los campos del formulario */
+        input {
+            padding: 10px; /* Espaciado interno */
+            margin: 10px 0; /* Margen arriba y abajo */
+            border: 1px solid #ccc; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 16px; /* Tamaño de la fuente */
+            width: calc(100% - 22px); /* Ajustar ancho para el borde */
+        }
+
+        /* Estilo del contenedor de botones */
+        .button-container {
+            display: flex; /* Usar flexbox para alinear botones */
+            justify-content: space-between; /* Espacio entre los botones */
+            margin-top: 10px; /* Espaciado superior */
+        }
+
+        /* Estilo del botón */
+        .action-button {
+            flex: 1; /* Ocupa el mismo espacio */
+            margin: 0 5px; /* Margen lateral */
+            padding: 10px; /* Espaciado interno */
+            background-color: rgba(0, 0, 255, 0.8); /* Color azul semitransparente */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+            transition: background-color 0.3s; /* Animación al pasar el mouse */
+            font-size: 16px; /* Tamaño de la fuente */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        .action-button:hover {
+            background-color: rgba(0, 0, 255, 1); /* Color azul más oscuro al pasar el mouse */
+        }
+
+        /* Estilo de la lista de almacenes */
+        .warehouse-list {
+            margin-top: 20px; /* Espaciado superior */
+            list-style-type: none; /* Sin viñetas */
+            padding: 0; /* Sin espaciado interno */
+        }
+
+        /* Estilo de cada elemento de la lista */
+        .warehouse-list li {
+            padding: 10px; /* Espaciado interno */
+            border: 1px solid #ccc; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            margin-bottom: 10px; /* Espaciado inferior */
+            display: flex; /* Usar flexbox para contenido */
+            justify-content: space-between; /* Espacio entre elementos */
+            align-items: center; /* Alinear verticalmente */
+        }
+
+        .remove-button {
+            background-color: red; /* Color rojo */
+            border: none; /* Sin borde */
+            color: white; /* Color del texto */
+            border-radius: 5px; /* Bordes redondeados */
+            padding: 5px 10px; /* Espaciado interno */
+            cursor: pointer; /* Cambiar cursor al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gestionar Almacenes</h1>
+        <form id="warehouse-form">
+            <input type="text" id="warehouse-name" placeholder="Nombre del Almacén" required>
+            <input type="text" id="warehouse-location" placeholder="Ubicación" required>
+            <div class="button-container">
+                <button type="submit" id="locate-button" class="action-button">Ubicar Almacén</button>
+                <a href="registrar.html">
+                    <button type="button" class="action-button">Registrar Almacén</button>
+                </a>
+            </div>
+        </form>
+
+        <ul class="warehouse-list" id="warehouse-list">
+            <!-- La lista de almacenes se añadirá aquí -->
+        </ul>
+    </div>
+
+    <script>
+        // Función para añadir almacenes a la lista
+        document.getElementById('warehouse-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            const name = document.getElementById('warehouse-name').value; // Obtener el nombre del almacén
+            const location = document.getElementById('warehouse-location').value; // Obtener la ubicación
+
+            // Crear un nuevo elemento de lista
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${name} - ${location} <button class="remove-button">Eliminar</button>`;
+            
+            // Añadir el nuevo elemento a la lista
+            document.getElementById('warehouse-list').appendChild(listItem);
+
+            // Limpiar los campos del formulario
+            document.getElementById('warehouse-name').value = '';
+            document.getElementById('warehouse-location').value = '';
+
+            // Añadir funcionalidad de eliminación
+            listItem.querySelector('.remove-button').addEventListener('click', function() {
+                listItem.remove(); // Eliminar el almacén de la lista
+            });
+
+            // Configurar el botón "Ubicar Almacén" para abrir la aplicación de mapas
+            document.getElementById('locate-button').onclick = function() {
+                const encodedLocation = encodeURIComponent(location); // Codificar la ubicación
+                window.open(`https://www.google.com/maps/search/?api=1&query=${encodedLocation}`, '_blank'); // Abrir el GPS
+            };
+        });
+    </script>
+
+</body>
+</html>
